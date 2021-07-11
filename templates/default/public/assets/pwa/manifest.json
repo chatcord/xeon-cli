@@ -1,0 +1,29 @@
+{
+      "short_name": "{%name%}",
+      "name": "{%name%}",
+      "icons": [
+            {
+                  "src": "/assets/logo/logo192.png",
+                  "sizes": "64x64 32x32 24x24 16x16",
+                  "type": "image/x-icon",
+                  "maskable": "any"
+            },
+            {
+                  "src": "/assets/logo/logo192.png",
+                  "type": "image/png",
+                  "sizes": "192x192",
+                  "maskable": "any"
+            },
+            {
+                  "src": "/assets/logo/logo512.png",
+                  "type": "image/png",
+                  "sizes": "512x512",
+                  "maskable": "any"
+            }
+      ],
+      "start_url": "/",
+      "display": "standalone",
+      "orientation": "portrait-primary",
+      "theme_color": "#232323",
+      "background_color": "#ffffff"
+}

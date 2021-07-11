@@ -1,0 +1,16 @@
+{
+      "files": [
+            "index.js",
+            "package.json",
+            "package-lock.json",
+            "public/index.html",
+            "public/assets/css/index.css",
+            "public/assets/pwa/manifest.json",
+            "src/main.js",
+            "src/views/app.js",
+            "src/views/app.css"
+      ],
+      "author": "Xeon-cli",
+      "name": "default",
+      "version": "1.0.0"
+}
