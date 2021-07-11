@@ -32,7 +32,8 @@ function createFiles(rootDir, templateDir, options) {
             const appName = options.name.split("/")[options.name.split("/").length - 1];
             for (let j = 0; j < config.files.length; j++) {
                   var value;
-                  fs.readFile(path.join(templateDir, config.files[j]), "utf-8", (err, data) => {
+                  var file = config.files[j];
+                  fs.readFile(path.join(templateDir, file), "utf-8", (err, data) => {
                         if (err) throw err;
                         value = data.replace(/{%name%}/gi, appName);
                         fs.outputFile(path.join(rootDir, config.files[j]), value, err => {
@@ -43,7 +44,7 @@ function createFiles(rootDir, templateDir, options) {
       });
 }
 var templateDir;
-function insertFiles(options) {
+async function insertFiles(options) {
       checkDir(options);
       const rootDir = options.targetDir;
       const templateKeys = Object.keys(Templatelist);
@@ -58,11 +59,14 @@ function insertFiles(options) {
                   break;
             }
       }
+      return ;
 }
 
 async function initGit(options) {
       const result = await execa('git', ['init'], {
             cwd: options.targetDir,
+      }).catch(err => {
+            if(err) throw err;
       });
       if (result.failed) {
             return Promise.reject(new Error('Failed to initialize git'));
@@ -76,19 +80,19 @@ export default async function initProject(options) {
       const tasks = new Listr([
             {
                   title: 'Checking For Directory',
-                  task: () => insertFiles(options),
-            },
-            {
-                  title: 'Initialize git',
-                  task: () => initGit(options),
-                  enabled: () => options.git,
+                  task: async () => await insertFiles(options),
             },
             {
                   title: 'Install dependencies',
-                  task: () =>
-                        projectInstall({
-                              cwd: options.targetDir,
-                        }),
+                  task: async () =>
+                  await projectInstall({
+                        cwd: options.targetDir,
+                  }),
+            },
+            {
+                  title: 'Initialize git',
+                  task: async () => await initGit(options),
+                  enabled: () => options.git,
             },
       ]);
       await tasks.run();
@@ -102,8 +106,6 @@ ${chalk.green.bold("Template Name: ")}${chalk.cyanBright(config.name)}
 ${chalk.green.bold("Template Author: ")}${chalk.cyanBright(config.author)}
 ${chalk.green.bold("Template Version: ")}${chalk.cyanBright(config.version)}
             `);
-            console.log();
-            console.log(chalk.blue.bold('Please Check The Settings : '), options);
             console.log(chalk.blueBright.bold(`
 A new xeon app named '${options.name.split("/")[options.name.split("/").length - 1]}' is created at '${options.targetDir}' .
 

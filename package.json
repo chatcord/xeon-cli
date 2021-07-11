@@ -1,6 +1,6 @@
 {
   "name": "xeon-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command Line Interface for Xeon JS.",
   "main": "./bin/xeon-cli",
   "bin": {
@@ -42,6 +42,7 @@
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.1",
     "listr": "^0.14.3",
+    "node-fetch": "^2.6.1",
     "pkg-install": "^1.0.0"
   }
 }

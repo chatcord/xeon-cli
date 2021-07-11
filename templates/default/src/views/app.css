@@ -27,3 +27,36 @@
       text-align: center;
       padding: 5px;
 }
+.logo {
+      width: 100%;
+      height: 200px;
+}
+.logo img {
+      width: 100%;
+      height: 100%;
+      animation: rotate 6s linear infinite;
+      text-shadow: 1px 1px 2px #00ff0a,
+                  2px 2px 4px #00ff0a,
+                  4px 4px 8px #00ff0a;
+      -webkit-filter: drop-shadow(5px 5px 0px #329438);
+      transition: all 6s inherit;
+}
+@keyframes rotate {
+      0% {
+            transform: rotate(0deg);
+            -webkit-filter: drop-shadow(5px 5px 0px #329438);
+      }
+      25% {
+            -webkit-filter: drop-shadow(5px -5px 0px #329438);
+      }
+      50% {
+            -webkit-filter: drop-shadow(-5px -5px 0px #329438);
+      }
+      75% {
+            -webkit-filter: drop-shadow(-5px 5px 0px #329438);
+      }
+      100% {
+            transform: rotate(360deg);
+            -webkit-filter: drop-shadow(5px 5px 0px #329438);
+      }
+}

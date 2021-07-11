@@ -3,6 +3,7 @@
 require = require('esm')(module /*, options*/);
 const chalk = require('chalk');
 const path = require("path");
+
 const args = process.argv.slice(2);
 if(args[0] === "create-app"){
       require('../src/createApp/createApp').cli(process.argv);

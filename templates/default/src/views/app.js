@@ -15,7 +15,7 @@ export default class extends Xeon {
                   <css src="/src/views/app.css" />
                   <div class="container">
                         <h2 class="greet">Congrats For Creating Your First Project On Xeon JS.</h2>
-                        <div id="logo"></div>
+                        <div class="logo"><img src="/assets/logo/logo.svg" /></div>
                         <h2 class="greet">App name : '{%name%}'</h2>
                         <p>Now Go To "./src/view/app.js" and change the content and refresh the page to view changes.</p>
                   </div>
