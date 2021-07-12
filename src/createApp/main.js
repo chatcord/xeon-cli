@@ -12,9 +12,15 @@ const access = promisify(fs.access);
 async function checkDir(options) {
       await access(options.targetDir, fs.constants.R_OK, err => {
             if (!err) {
-                  console.log(chalk.red.bold(`${options.targetDir} already exists.`));
-                  console.log(chalk.red.bold(`Terminating All Current Task ...`));
-                  process.exit(1);
+                  fs.readdir(options.targetDir, (err, files) => {
+                        if(err) throw err;
+                        if(files.length){
+                              console.log(chalk.red.bold(`${options.targetDir} already exists.And it is not empty.`));
+                              console.log(chalk.red.bold(`xeon-cli requires an empty directory or it will create that.`));
+                              console.log(chalk.red.bold(`Terminating All Current Task ...`));
+                              process.exit(1);
+                        }
+                  });
             } else {
                   fs.mkdir(options.targetDir, err => {
                         if (!err) {
@@ -32,8 +38,7 @@ function createFiles(rootDir, templateDir, options) {
             const appName = options.name.split("/")[options.name.split("/").length - 1];
             for (let j = 0; j < config.files.length; j++) {
                   var value;
-                  var file = config.files[j];
-                  fs.readFile(path.join(templateDir, file), "utf-8", (err, data) => {
+                  fs.readFile(path.join(templateDir, config.files[j]), "utf-8", (err, data) => {
                         if (err) throw err;
                         value = data.replace(/{%name%}/gi, appName);
                         fs.outputFile(path.join(rootDir, config.files[j]), value, err => {
@@ -113,7 +118,7 @@ You can now run the project using :
 ${chalk.yellow.bold('cd')} ${chalk.white( "."+options.targetDir.split(process.cwd())[options.targetDir.split(process.cwd()).length - 1] )}
 ${chalk.yellow.bold("npm")} ${chalk.white("start")}
 
-${chalk.cyanBright.bold("Enjoy😊...")}
+${chalk.cyanBright.bold("Let's Code Together...")}
             `));
       });
 }
