@@ -15,10 +15,12 @@ function parseArgumentsIntoOptions(rawArgs) {
                   '--git': Boolean,
                   '--yes': Boolean,
                   '--default': Boolean,
+                  '--updateNpm': Boolean,
                   '--template': String,
                   '-g': '--git',
                   '-y': '--yes',
                   '--def': '--default',
+                  '-u': '--updateNpm',
             },
             {
                   argv: rawArgs.slice(2),
@@ -30,6 +32,7 @@ function parseArgumentsIntoOptions(rawArgs) {
             name: args._[1],
             template: args['--template'],
             git: args['--git'] || false,
+            updatePackages: args['--updateNpm'] || false,
       };
 }
 async function promptForMissingOptions(options) {
@@ -71,11 +74,20 @@ async function promptForMissingOptions(options) {
                   default: false,
             });
       }
+      if (!options.updatePackages) {
+            questions.push({
+                  type: 'confirm',
+                  name: 'updatePackages',
+                  message: 'Update all outdated packages? (default No)',
+                  default: false,
+            });
+      }
       const answers = await inquirer.prompt(questions);
       return {
             ...options,
             template: options.template || answers.template,
             git: options.git || answers.git,
+            updatePackages: options.updatePackages || answers.updatePackages,
       };
 }
 
