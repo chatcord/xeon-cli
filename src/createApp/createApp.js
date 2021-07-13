@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2021-present, ChatCord, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import arg from 'arg';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
@@ -38,19 +44,19 @@ function parseArgumentsIntoOptions(rawArgs) {
 async function promptForMissingOptions(options) {
       const defaultTemplate = 'default';
       const questions = [];
-      if(!options.name){
+      if (!options.name) {
             const { name } = await inquirer.prompt([
-            {
-                  type: 'input',
-                  name: 'name',
-                  message: 'Name Of Your App (use Lowercase):',
-            }]);
+                  {
+                        type: 'input',
+                        name: 'name',
+                        message: 'Name Of Your App (use Lowercase):',
+                  }]);
             options = {
                   ...options,
                   name: name,
             }
       }
-      if (options.skipPrompts || options.defaultSettings ) {
+      if (options.skipPrompts || options.defaultSettings) {
             return {
                   ...options,
                   template: options.template || defaultTemplate,
