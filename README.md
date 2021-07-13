@@ -28,7 +28,9 @@ $ npx xeon-cli create-app <app_name> --template=<template_name/template_address>
 ### *__Another Easier Way to Create Xeon App:
 Just Run Command : ```npx xeon-cli create-app```
 
-xeon-cli will inquire you for all settings.
+xeon-cli will inquire you for all settings. like this 👇👇👇
+
+![Xeon-cli](/doc/xeon-cli.gif)
 
 #### *__Flags :__*
 * --git / -g = initialize git (Actualy Executes 'git init') [Read More](https://git-scm.com/docs/git-init).
