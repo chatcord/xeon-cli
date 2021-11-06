@@ -15,7 +15,7 @@ import { promisify } from 'util';
 import execa from 'execa';
 import Listr from 'listr';
 import { projectInstall } from 'pkg-install';
-import { Templatelist } from './template.js';
+// import { Templatelist } from './template.js';
 import copyFolder from '../utils/copyFolder.js';
 // Some promisify functions to make them asyncronus.
 const access = promisify(fs.access);
@@ -42,6 +42,22 @@ async function checkDir(options) {
 }
 // asyncronus function to copy template files.
 async function copyProject(options) {
+
+      /**
+       * Get all template's list
+       */
+      const response = await fetch("https://chatcord.github.io/XeonJS-templates/templates.json", {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                  'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+      });
+      const Templatelist = await response.json();
       // check the target directory.
       checkDir(options);
       // get the template index of the template name from the template list.
